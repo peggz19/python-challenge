@@ -29,8 +29,7 @@ with open(budgetdoc, 'r', encoding = "UTF-8") as f:
         profit_loss = [int(num) for num in profitloss]
 
         #Add changes
-        
-
+       
     #Find total months
     totalmonths = len(date)
     print(totalmonths)    
@@ -39,11 +38,9 @@ with open(budgetdoc, 'r', encoding = "UTF-8") as f:
     def net_amount (numbers): 
 
         net = 0
-        for num in numbers: 
-            if num > net: 
-                net = net + num
-
-        return net_amount
+        for num in numbers:  
+            net = net + num
+        return net
 
     print(net_amount(profit_loss))
 
@@ -58,6 +55,18 @@ with open(budgetdoc, 'r', encoding = "UTF-8") as f:
 
         return max_num
 
-    print(maximum(profit_loss))
+    print(maximum(change))
 
     #Find greatest decrease in profits
+
+    def minimum(numbers): 
+
+        min_num = 0
+        for num in numbers: 
+            if num < min_num: 
+                min_num = num
+
+        return min_num
+
+    print(minimum(change))
+    
