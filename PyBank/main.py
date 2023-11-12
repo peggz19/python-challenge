@@ -30,6 +30,7 @@ with open(budgetdoc, 'r', encoding = "UTF-8") as f:
         changelist = [profit_loss[i] - profit_loss[i-1] for i, v in enumerate(profit_loss)]
         changelist[0]= 0
         change = [int(num) for num in changelist]
+
     #Find total months
     totalmonths = len(date)
     print(totalmonths)    
@@ -55,8 +56,7 @@ with open(budgetdoc, 'r', encoding = "UTF-8") as f:
         return tot
     
     total_change = (total(change))
-        # print(total_change)
-    average = total_change/(len(change)-1)
+    average = round(total_change/(len(change)-1),2) #minus 1 because my first row was not substracted by anything and is not included in the calculation
     print(average)
 
     #Find greatest increase in profits
