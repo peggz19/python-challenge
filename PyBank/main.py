@@ -91,6 +91,7 @@ with open(analysis, "w") as f:
     writer = csv.writer(f)
     #Write the title
     writer.writerow(["Financial analysis"])
+    #write the other rows
     writer.writerow(["-------------------------------------------------------------------------------"])
     writer.writerow([f"Total Months: {totalmonths}"])
     writer.writerow([f"Total: $ {net_amount}"])

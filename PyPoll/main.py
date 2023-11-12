@@ -2,10 +2,9 @@ import os
 import csv
 
 #Listing all my paths
-#Listing all my paths
 electiondoc = r"C:\Users\tadip\OneDrive\Documents\BAC\Data Analytics\Module 3 - Python\python-challenge\PyPoll\Resources\election_data.csv"
 analysis = r"C:\Users\tadip\OneDrive\Documents\BAC\Data Analytics\Module 3 - Python\python-challenge\PyPoll\Analysis\Election Results.txt"
-#Since the data is not seperated in two colomns, we create lists to store them.
+#Since the data is not seperated in colomns, we create lists to store them.
 ballotID = []
 county = []
 candidate =[]
@@ -31,7 +30,7 @@ with open(electiondoc, 'r', encoding = "UTF-8") as f:
     totalvotes = len(ballotID)
     print(totalvotes)
 
-    #Create a list of all the candidates the loop won't add the name if it was already added once
+    #Create a list of all the candidates. The loop won't add the name if it was already added once.
     all_candidates = []
 
     for name in candidate:
@@ -39,7 +38,7 @@ with open(electiondoc, 'r', encoding = "UTF-8") as f:
             all_candidates.append(name)
     print(all_candidates)
     
-    #Find Charles' total of votes and percentage
+    #Find Charles' total of votes and percentage.
     counter = 0
     for i in candidate:
         if i == "Charles Casper Stockham":
@@ -49,7 +48,7 @@ with open(electiondoc, 'r', encoding = "UTF-8") as f:
     charles_vote = round(charles_count/totalvotes *100,3)
     print(charles_vote)
 
-    #Find Diane's total of votes and percentage
+    #Find Diane's total of votes and percentage.
     counter2 = 0
     for i in candidate:
         if i == "Diana DeGette":
@@ -59,7 +58,7 @@ with open(electiondoc, 'r', encoding = "UTF-8") as f:
     diane_vote = round(diane_count/totalvotes *100,3)
     print(diane_vote)
 
-    #Find Charles' total of votes
+    #Find Charles' total of votes.
     counter3 = 0
     for i in candidate:
         if i == "Raymon Anthony Doane":
@@ -69,7 +68,7 @@ with open(electiondoc, 'r', encoding = "UTF-8") as f:
     raymon_vote = round(raymon_count/totalvotes *100,3)
     print(raymon_vote)
 
-    #Find the winner
+    #Find the winner.
     if charles_vote > diane_vote:
         winner = all_candidates[0]
     elif diane_vote > raymon_vote:
@@ -78,12 +77,12 @@ with open(electiondoc, 'r', encoding = "UTF-8") as f:
         winner = all_candidates[2]
     print(winner)
 
-#Creating the txt file to display the analysis
+#Creating the txt file to display the analysis.
 with open(analysis, "w") as f:
     writer = csv.writer(f)
-    #Write the title
+    #Write the title.
     writer.writerow(["Election Results"])
-    #Write the rest of the rows
+    #Write the rest of the rows.
     writer.writerow(["-----------------------------------------"])
     writer.writerow([f"Total Votes: {totalvotes}"])
     writer.writerow(["-----------------------------------------"])
