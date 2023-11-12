@@ -1,8 +1,5 @@
 import os
 import csv
-#reminder the variable type might have to be change to int()
-# a variable refereing to another variable in a For or While loop needs 2 ==
-#Ne pas oublier de ne pas read the header quand je ferai le travail
 
 #Listing all my paths
 budgetdoc = r"C:\Users\tadip\OneDrive\Documents\BAC\Data Analytics\Module 3 - Python\python-challenge\PyBank\Resources\budget_data.csv"
@@ -10,7 +7,7 @@ analysis = r"C:\Users\tadip\OneDrive\Documents\BAC\Data Analytics\Module 3 - Pyt
 #Since the data is not seperated in two colomns, we create lists to store them.
 date = []
 profitloss = []
-change =[]
+changelist =[]
 #Read the budget_data.csv file
 with open(budgetdoc, 'r', encoding = "UTF-8") as f: 
     csvreader = csv.reader(f,delimiter=",")
@@ -28,10 +25,11 @@ with open(budgetdoc, 'r', encoding = "UTF-8") as f:
         profitloss.append(row[1])
         profit_loss = [int(num) for num in profitloss]
 
-        #Add changes by calculating the values of (i+1) - i where i is the row
-        for i in profit_loss:
-            difference = (i+1) - i
-            change.append(difference)
+        #Add changes by substracting the value of one row by the previous one in the same list
+        #Change the type to integer
+        changelist = [profit_loss[i] - profit_loss[i-1] for i, v in enumerate(profit_loss)]
+        changelist[0]= 0
+        change = [int(num) for num in changelist]
     #Find total months
     totalmonths = len(date)
     print(totalmonths)    
@@ -48,8 +46,19 @@ with open(budgetdoc, 'r', encoding = "UTF-8") as f:
     net_amount = amount(profit_loss)
     print(net_amount)
 
-    #Find average change
+    #Find average change by first finding the net total and dividing it by the number of changes
+    def total (numbers): 
+
+        tot = 0
+        for num in numbers:  
+            tot = tot + num
+        return tot
     
+    total_change = (total(change))
+        # print(total_change)
+    average = total_change/(len(change)-1)
+    print(average)
+
     #Find greatest increase in profits
     def maximum(numbers): 
 
@@ -85,6 +94,7 @@ with open(analysis, "w") as f:
     writer.writerow(["-------------------------------------------------------------------------------"])
     writer.writerow([f"Total Months: {totalmonths}"])
     writer.writerow([f"Total: $ {net_amount}"])
-    writer.writerow([f"Average Change:"])
-    writer.writerow([f"Greatest Increase in Profits: $ {maximus}"])
+    writer.writerow([f"Average Change: ${average}"])
+    writer.writerow([f"Greatest Increase in Profits: $ ({maximus})"])
     writer.writerow([f"Greatet Decrease in Profits: $ ({minimus})"])
+    
