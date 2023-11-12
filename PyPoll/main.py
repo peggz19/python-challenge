@@ -41,7 +41,7 @@ with open(electiondoc, 'r', encoding = "UTF-8") as f:
     #Find Charles' total of votes and percentage.
     counter = 0
     for i in candidate:
-        if i == "Charles Casper Stockham":
+        if i == all_candidates[0]:
             counter += 1
     charles_count = counter
     print(charles_count)
@@ -51,7 +51,7 @@ with open(electiondoc, 'r', encoding = "UTF-8") as f:
     #Find Diane's total of votes and percentage.
     counter2 = 0
     for i in candidate:
-        if i == "Diana DeGette":
+        if i == all_candidates[1]:
             counter2 += 1
     diane_count = counter2
     print(diane_count)
@@ -61,7 +61,7 @@ with open(electiondoc, 'r', encoding = "UTF-8") as f:
     #Find Charles' total of votes.
     counter3 = 0
     for i in candidate:
-        if i == "Raymon Anthony Doane":
+        if i == all_candidates[2]:
             counter3 += 1
     raymon_count = counter3
     print(raymon_count)
