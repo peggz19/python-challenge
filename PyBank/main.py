@@ -6,7 +6,7 @@ import csv
 
 #Listing all my paths
 budgetdoc = r"C:\Users\tadip\OneDrive\Documents\BAC\Data Analytics\Module 3 - Python\python-challenge\PyBank\Resources\budget_data.csv"
-analysisfolder = r"C:\Users\tadip\OneDrive\Documents\BAC\Data Analytics\Module 3 - Python\python-challenge\PyBank\Analysis"
+analysis = r"C:\Users\tadip\OneDrive\Documents\BAC\Data Analytics\Module 3 - Python\python-challenge\PyBank\Analysis\Financial Analysis.txt"
 #Since the data is not seperated in two colomns, we create lists to store them.
 date = []
 profitloss = []
@@ -24,27 +24,32 @@ with open(budgetdoc, 'r', encoding = "UTF-8") as f:
         #Add dates
         date.append(row[0])
 
-        #Add profit/loss and make it integer
+        #Add profit/loss and change the type to integer
         profitloss.append(row[1])
         profit_loss = [int(num) for num in profitloss]
 
-        #Add changes
-       
+        #Add changes by calculating the values of (i+1) - i where i is the row
+        for i in profit_loss:
+            difference = (i+1) - i
+            change.append(difference)
     #Find total months
     totalmonths = len(date)
     print(totalmonths)    
 
     #Find the net amount of profit and loss by defining a function
-    def net_amount (numbers): 
+    def amount (numbers): 
 
         net = 0
         for num in numbers:  
             net = net + num
         return net
 
-    print(net_amount(profit_loss))
+    
+    net_amount = amount(profit_loss)
+    print(net_amount)
 
     #Find average change
+    
     #Find greatest increase in profits
     def maximum(numbers): 
 
@@ -55,7 +60,8 @@ with open(budgetdoc, 'r', encoding = "UTF-8") as f:
 
         return max_num
 
-    print(maximum(change))
+    maximus = maximum(change)
+    print(maximus)
 
     #Find greatest decrease in profits
 
@@ -68,5 +74,17 @@ with open(budgetdoc, 'r', encoding = "UTF-8") as f:
 
         return min_num
 
-    print(minimum(change))
-    
+    minimus = minimum(change)
+    print(minimus)
+
+#Creating the txt file to display the analysis
+with open(analysis, "w") as f:
+    writer = csv.writer(f)
+    #Write the title
+    writer.writerow(["Financial analysis"])
+    writer.writerow(["-------------------------------------------------------------------------------"])
+    writer.writerow([f"Total Months: {totalmonths}"])
+    writer.writerow([f"Total: $ {net_amount}"])
+    writer.writerow([f"Average Change:"])
+    writer.writerow([f"Greatest Increase in Profits: $ {maximus}"])
+    writer.writerow([f"Greatet Decrease in Profits: $ ({minimus})"])
